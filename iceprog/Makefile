@@ -1,6 +1,14 @@
 include ../config.mk
-LDLIBS = `pkg-config --libs libftdi1`
-CFLAGS = -MD -O0 -ggdb -Wall -std=c99 `pkg-config --cflags libftdi1`
+
+# iceprog seems to be compatible with libftdi-0.x and libftdi-1.x
+ifeq (yes, $(shell pkg-config --exists libftdi1 && echo yes))
+LIBFTDI=libftdi1
+else
+LIBFTDI=libftdi
+endif
+
+LDLIBS = `pkg-config --libs ${LIBFTDI}`
+CFLAGS = -MD -O0 -ggdb -Wall -std=c99 `pkg-config --cflags ${LIBFTDI}`
 MXEGCC = /usr/local/src/mxe/usr/bin/i686-pc-mingw32-gcc
 
 all: iceprog

@@ -1,4 +1,4 @@
-CXX = clang
-CC = $(CXX)
+CC ?= clang
+CXX ?= clang++
 DESTDIR ?=
 PREFIX ?= /usr/local

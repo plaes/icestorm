@@ -1,0 +1,16 @@
+language: cpp
+sudo: false
+addons:
+  apt:
+    packages:
+      - python3
+      - libftdi-dev
+
+matrix:
+  include:
+    - compiler: clang
+    - compiler: gcc
+
+script: make
+notifications:
+  email: false

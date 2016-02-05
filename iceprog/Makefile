@@ -1,6 +1,6 @@
 include ../config.mk
-LDLIBS = -L/usr/local/lib -lftdi -lm
-CFLAGS = -MD -O0 -ggdb -Wall -std=c99 -I/usr/local/include
+LDLIBS = `pkg-config --libs libftdi1`
+CFLAGS = -MD -O0 -ggdb -Wall -std=c99 `pkg-config --cflags libftdi1`
 MXEGCC = /usr/local/src/mxe/usr/bin/i686-pc-mingw32-gcc
 
 all: iceprog
@@ -8,7 +8,7 @@ all: iceprog
 iceprog: iceprog.o
 
 iceprog.exe: iceprog.c
-	$(MXEGCC) -std=c99 -o iceprog.exe -Os iceprog.c -lftdi -lusb -lm
+	$(MXEGCC) -std=c99 -o iceprog.exe -Os iceprog.c
 
 install: all
 	mkdir -p $(DESTDIR)$(PREFIX)/bin

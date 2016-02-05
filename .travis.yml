@@ -6,10 +6,17 @@ addons:
       - python3
       - libftdi-dev
 
+before_install:
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        brew install python3;
+      fi
+
 matrix:
   include:
     - compiler: clang
-    - compiler: gcc
+    #- compiler: gcc
+    - os: osx
+      compiler: clang
 
 script: make
 notifications:
